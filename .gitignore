@@ -1,0 +1,4 @@
+# Don't need all those node modules.
+/node_modules
+
+/*.log
