@@ -63,3 +63,4 @@ System.register([], function(exports_1) {
         }
     }
 });
+//# sourceMappingURL=time-vs-pix.js.map

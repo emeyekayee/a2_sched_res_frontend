@@ -18,9 +18,7 @@ interface RequestData {
   meta: Meta
 }
 
-
 export class TimeVsPix {
-
   public base_time          = 0;        // aka @baseTime
   public window_width_secs  = 3 * 3600; // aka @timeWindow
   public window_width_pix   = 750;      // aka @pixWindow
@@ -35,19 +33,17 @@ export class TimeVsPix {
   constructor() {};
 
   merge_metadata(request_data: RequestData) {
-    var meta = request_data.meta
-    this.meta = meta
-    if ( !this.base_time ) {
-      this.base_time = meta['min_time']
-    }
+    var meta = request_data.meta;
+    this.meta = meta;
+    if ( !this.base_time ) { this.base_time = meta['min_time'] }
+
     var tlo = this.dom_time_lo;
     this.dom_time_lo = tlo ? Math.min(tlo, meta.t1) : meta.t1;
+
     var thi = this.dom_time_hi;
     this.dom_time_hi = thi ? Math.max(thi, meta.t2) : meta.t2;
 
-    if (meta.visible_time) {
-      this.window_width_secs = meta.visible_time
-    }
+    if (meta.visible_time) { this.window_width_secs = meta.visible_time }
   }
 
   nextHi() { return this.dom_time_hi + this.window_width_secs }
@@ -77,7 +73,4 @@ export class TimeVsPix {
   uxTimeOffsetPix(ux_time) {
     return this.secsToPixScale( this.uxTimeOffset(ux_time) )
   }
-  
-  // Beyond here, scrolling, monitor, hairline time_cursor
-  // in time_pix.js.coffee
 }

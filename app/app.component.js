@@ -1,4 +1,4 @@
-System.register(['angular2/core', './hero-detail.component', './hero.service', './blocks.service'], function(exports_1) {
+System.register(['angular2/core', './hero-detail.component', './hero.service', './blocks.service', './time-vs-pix', './use-block.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, hero_detail_component_1, hero_service_1, blocks_service_1;
+    var core_1, hero_detail_component_1, hero_service_1, blocks_service_1, time_vs_pix_1, use_block_component_1;
     var AppComponent;
     return {
         setters:[
@@ -23,6 +23,12 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
             },
             function (blocks_service_1_1) {
                 blocks_service_1 = blocks_service_1_1;
+            },
+            function (time_vs_pix_1_1) {
+                time_vs_pix_1 = time_vs_pix_1_1;
+            },
+            function (use_block_component_1_1) {
+                use_block_component_1 = use_block_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -31,24 +37,38 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                     this._blocksService = _blocksService;
                     this.title = 'Tour de Liv';
                     this.blocks = {};
+                    this.a_time_block = null;
+                    this.time_pix = null;
                 }
                 ;
-                AppComponent.prototype.blockText = function () {
-                    // return "This is text";
-                    time_blocks = this.blocks['ZTimeHeaderDay_-8'];
-                    return time_blocks ? time_blocks[0].blk.title : "";
-                };
                 AppComponent.prototype.getHeroes = function () {
                     var _this = this;
                     this._heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
+                };
+                AppComponent.prototype.getATimeBlockTitle = function () {
+                    return this.a_time_block.blk.title;
                 };
                 AppComponent.prototype.getBlocks = function () {
                     this._blocksService.getBlocks().then(
                     // blocks => this.blocks = blocks;
                     function (blocks) {
                         this.blocks = blocks;
+                        if (this.blocks.meta) {
+                            // Mock the processing of response blocks.
+                            // Start by constructing a TimeVsPix instance.
+                            this.time_pix = (new time_vs_pix_1.TimeVsPix());
+                            this.time_pix.merge_metadata(this.blocks);
+                            this.a_time_block = this.getTimeBlock();
+                        }
                     }.bind(this));
                     // console.debug(this.blocks);
+                };
+                AppComponent.prototype.getTimeBlock = function () {
+                    time_blocks = this.blocks['ZTimeHeaderDay_-8'];
+                    if (time_blocks) {
+                        return time_blocks[0];
+                    }
+                    return null;
                 };
                 AppComponent.prototype.ngOnInit = function () {
                     this.getHeroes();
@@ -58,10 +78,10 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>{{title}}</h1>\n    <p>{{blockText()}}</p>\n    <h2>My Heroes</h2>\n    <ul class=\"heroes\">\n      <li *ngFor=\"#hero of heroes\" \n          [class.selected]=\"hero === selectedHero\"\n          (click)=\"onSelect(hero)\">\n        <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n      </li>\n    </ul>\n    <my-hero-detail [hero]=\"selectedHero\"></my-hero-detail>\n   ",
+                        template: "\n    <h1>{{title}}</h1>\n    <p *ngIf=\"a_time_block\">\n      Got a time block !\n      {{ getATimeBlockTitle() }}\n      <use-block [block]=\"a_time_block\"\n                 [time_pix]=\"time_pix\">\n      </use-block>\n    </p>\n    <h2>My Heroes</h2>\n    <ul class=\"heroes\">\n      <li *ngFor=\"#hero of heroes\" \n          [class.selected]=\"hero === selectedHero\"\n          (click)=\"onSelect(hero)\">\n        <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n      </li>\n    </ul>\n    <my-hero-detail [hero]=\"selectedHero\"></my-hero-detail>\n   ",
                         // styles:[heroesCss],
                         styleUrls: ['app/heroes.css'],
-                        directives: [hero_detail_component_1.HeroDetailComponent],
+                        directives: [hero_detail_component_1.HeroDetailComponent, use_block_component_1.UseBlockComponent],
                         providers: [hero_service_1.HeroService, blocks_service_1.BlocksService]
                     }), 
                     __metadata('design:paramtypes', [hero_service_1.HeroService, blocks_service_1.BlocksService])
