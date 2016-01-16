@@ -6,6 +6,12 @@ import {BlocksService}       from './blocks.service';
 import {TimeVsPix}           from './time-vs-pix';
 import {UseBlockComponent}   from './use-block.component';
 
+// Interface for a_time_block
+interface ResourceTimeBlock {
+  rsrc: any,
+  blk: any
+}
+
 @Component({
   selector: 'my-app',
   template: `
@@ -38,7 +44,7 @@ export class AppComponent implements OnInit {
   public heroes: Hero[];
   public selectedHero: Hero;
   public blocks = {};
-  public a_time_block = null;
+  public a_time_block: ResourceTimeBlock = null;
   public time_pix     = null;
 
   constructor(private _heroService: HeroService,
@@ -72,7 +78,7 @@ export class AppComponent implements OnInit {
   }
 
   getTimeBlock() {
-    time_blocks = this.blocks['ZTimeHeaderDay_-8'];
+    var time_blocks: ResourceTimeBlock[] = this.blocks['ZTimeHeaderDay_-8'];
     if (time_blocks) { return time_blocks[0] }
     return null;
   }

@@ -1,6 +1,17 @@
 import {Component} from 'angular2/core';
 import {TimeVsPix} from './time-vs-pix';
 
+// Interface for a_time_block
+interface ResourceTimeBlock {
+  rsrc: any,
+  blk: any
+}
+
+interface GeoHash {
+  left: string,
+  width: string
+}
+
 @Component({
   selector: 'use-block',
   template: `
@@ -15,18 +26,22 @@ import {TimeVsPix} from './time-vs-pix';
 })
 
 export class UseBlockComponent {
-  public block = {};          // SHOULD type this as 'Block'.
-  public time_pix: TimeVsPix; // Access to time vs pixel calculations
+  public block: ResourceTimeBlock;
+  public time_pix: TimeVsPix;  // Access to time vs pixel calculations
+  private _geo_hash: GeoHash;  // Cache result of time_pix.styleGeoHash()
 
   // Does this override the auto-generated constructor ?
-  // constructor(public block: Object, public time_pix: TimeVsPix) {
+  // constructor(public block: ResourceTimeBlock,
+  //             public time_pix: TimeVsPix) {
   //   this.block = block;
   //   this.time_pix = time_pix;
   //   var foo = 'bar';
   // }
 
   styleGeoHash() { 
-    var hash = this.time_pix.styleGeoHash(this.block.blk);
-    return hash;
+    if (!this._geo_hash) {
+      this._geo_hash = this.time_pix.styleGeoHash(this.block.blk);
+    }
+    return this._geo_hash;
   }
 }

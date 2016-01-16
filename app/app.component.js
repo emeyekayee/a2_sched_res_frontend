@@ -64,7 +64,7 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                     // console.debug(this.blocks);
                 };
                 AppComponent.prototype.getTimeBlock = function () {
-                    time_blocks = this.blocks['ZTimeHeaderDay_-8'];
+                    var time_blocks = this.blocks['ZTimeHeaderDay_-8'];
                     if (time_blocks) {
                         return time_blocks[0];
                     }

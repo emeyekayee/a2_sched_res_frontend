@@ -18,17 +18,19 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             UseBlockComponent = (function () {
                 function UseBlockComponent() {
-                    this.block = {}; // SHOULD type this as 'Block'.
                 }
                 // Does this override the auto-generated constructor ?
-                // constructor(public block: Object, public time_pix: TimeVsPix) {
+                // constructor(public block: ResourceTimeBlock,
+                //             public time_pix: TimeVsPix) {
                 //   this.block = block;
                 //   this.time_pix = time_pix;
                 //   var foo = 'bar';
                 // }
                 UseBlockComponent.prototype.styleGeoHash = function () {
-                    var hash = this.time_pix.styleGeoHash(this.block.blk);
-                    return hash;
+                    if (!this._geo_hash) {
+                        this._geo_hash = this.time_pix.styleGeoHash(this.block.blk);
+                    }
+                    return this._geo_hash;
                 };
                 UseBlockComponent = __decorate([
                     core_1.Component({
