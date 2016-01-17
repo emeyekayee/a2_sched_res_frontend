@@ -2,10 +2,10 @@ import {Component, OnInit}   from 'angular2/core';
 import {Hero}                from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService}         from './hero.service';
-import {BlocksService}       from './blocks.service';
 import {TimeVsPix}           from './time-vs-pix';
 import {UseBlockComponent}   from './use-block.component';
-import {ResourceTimeBlock}   from './resource-time-block';
+import {ResponseDataService} from './response-data.service';
+import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
 
 @Component({
   selector: 'my-app',
@@ -31,19 +31,19 @@ import {ResourceTimeBlock}   from './resource-time-block';
   // styles:[heroesCss],
   styleUrls:['app/heroes.css'],
   directives: [HeroDetailComponent, UseBlockComponent],
-  providers: [HeroService, BlocksService]
+  providers: [HeroService, ResponseDataService]
 })
 
 export class AppComponent implements OnInit {
   public title = 'Tour de Liv';
   public heroes: Hero[];
   public selectedHero: Hero;
-  public blocks = {};
+  public blocks: ResponseData;
   public a_time_block: ResourceTimeBlock = null;
   public time_pix     = null;
 
   constructor(private _heroService: HeroService,
-              private _blocksService: BlocksService) {};
+              private _blocksService: ResponseDataService) {};
 
   getHeroes() {
     this._heroService.getHeroes().then(heroes => this.heroes = heroes);
@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
         }
       }.bind(this)
     );
-    // console.debug(this.blocks);
   }
 
   getTimeBlock() {

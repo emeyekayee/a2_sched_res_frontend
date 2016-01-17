@@ -1,3 +1,4 @@
+import {ResponseData,Meta}   from './resource-time-block';
 
 // NO  @scroll_container:  ()    -> $('#scrolling-container')
 // NO  @set_display_parms: ()    => // Browser, etc:  @pixWindow
@@ -7,8 +8,6 @@
 // NO  @scroll_to_tlo:     ()    => # bound
 // NO  @set_time_cursor:   ()    => # bound
 // NO  @scroll_monitor:    ()    => 
-
-import {ResponseData,Meta}   from './resource-time-block';
 
 export class TimeVsPix {
   public base_time          = 0;        // aka @baseTime

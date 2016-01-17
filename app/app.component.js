@@ -1,4 +1,4 @@
-System.register(['angular2/core', './hero-detail.component', './hero.service', './blocks.service', './time-vs-pix', './use-block.component'], function(exports_1) {
+System.register(['angular2/core', './hero-detail.component', './hero.service', './time-vs-pix', './use-block.component', './response-data.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, hero_detail_component_1, hero_service_1, blocks_service_1, time_vs_pix_1, use_block_component_1;
+    var core_1, hero_detail_component_1, hero_service_1, time_vs_pix_1, use_block_component_1, response_data_service_1;
     var AppComponent;
     return {
         setters:[
@@ -21,14 +21,14 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
             function (hero_service_1_1) {
                 hero_service_1 = hero_service_1_1;
             },
-            function (blocks_service_1_1) {
-                blocks_service_1 = blocks_service_1_1;
-            },
             function (time_vs_pix_1_1) {
                 time_vs_pix_1 = time_vs_pix_1_1;
             },
             function (use_block_component_1_1) {
                 use_block_component_1 = use_block_component_1_1;
+            },
+            function (response_data_service_1_1) {
+                response_data_service_1 = response_data_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -36,7 +36,6 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                     this._heroService = _heroService;
                     this._blocksService = _blocksService;
                     this.title = 'Tour de Liv';
-                    this.blocks = {};
                     this.a_time_block = null;
                     this.time_pix = null;
                 }
@@ -61,7 +60,6 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                             this.a_time_block = this.getTimeBlock();
                         }
                     }.bind(this));
-                    // console.debug(this.blocks);
                 };
                 AppComponent.prototype.getTimeBlock = function () {
                     var time_blocks = this.blocks['ZTimeHeaderDay_-8'];
@@ -82,9 +80,9 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                         // styles:[heroesCss],
                         styleUrls: ['app/heroes.css'],
                         directives: [hero_detail_component_1.HeroDetailComponent, use_block_component_1.UseBlockComponent],
-                        providers: [hero_service_1.HeroService, blocks_service_1.BlocksService]
+                        providers: [hero_service_1.HeroService, response_data_service_1.ResponseDataService]
                     }), 
-                    __metadata('design:paramtypes', [hero_service_1.HeroService, blocks_service_1.BlocksService])
+                    __metadata('design:paramtypes', [hero_service_1.HeroService, response_data_service_1.ResponseDataService])
                 ], AppComponent);
                 return AppComponent;
             })();

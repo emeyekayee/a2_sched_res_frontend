@@ -1,16 +1,16 @@
-// NO  @scroll_container:  ()    -> $('#scrolling-container')
-// NO  @set_display_parms: ()    => // Browser, etc:  @pixWindow
-// NO  @scroll_to_ux_time: (uxt) ->
-// NO  @scroll_to_thi:     ()    ->
-// NO  @ux_time_of_pix:    (x)   ->
-// NO  @scroll_to_tlo:     ()    => # bound
-// NO  @set_time_cursor:   ()    => # bound
-// NO  @scroll_monitor:    ()    => 
 System.register([], function(exports_1) {
     var TimeVsPix;
     return {
         setters:[],
         execute: function() {
+            // NO  @scroll_container:  ()    -> $('#scrolling-container')
+            // NO  @set_display_parms: ()    => // Browser, etc:  @pixWindow
+            // NO  @scroll_to_ux_time: (uxt) ->
+            // NO  @scroll_to_thi:     ()    ->
+            // NO  @ux_time_of_pix:    (x)   ->
+            // NO  @scroll_to_tlo:     ()    => # bound
+            // NO  @set_time_cursor:   ()    => # bound
+            // NO  @scroll_monitor:    ()    => 
             TimeVsPix = (function () {
                 function TimeVsPix() {
                     this.base_time = 0; // aka @baseTime
