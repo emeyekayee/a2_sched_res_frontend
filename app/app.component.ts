@@ -29,7 +29,7 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>
    `,
   // styles:[heroesCss],
-  styleUrls:['app/heroes.css'],
+  styleUrls:['app/heroes.css', 'app/scheduled-resource.css'],
   directives: [HeroDetailComponent, UseBlockComponent],
   providers: [HeroService, ResponseDataService]
 })
