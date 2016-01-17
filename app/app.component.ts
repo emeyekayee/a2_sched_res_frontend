@@ -62,10 +62,8 @@ export class AppComponent implements OnInit {
         if (this.response_data.meta) {
           // Mock the processing of response data.
           // Start by constructing a TimeVsPix instance.
-          this.time_pix     = (new TimeVsPix());
-          this.time_pix.merge_metadata(this.response_data);
+          this.time_pix = new TimeVsPix().merge_metadata(this.response_data);
           this.a_time_block = this.getTimeBlock();
-          // new UseBlockComponent(this.a_time_block, this.time_pix);
         }
       }.bind(this)
     );
