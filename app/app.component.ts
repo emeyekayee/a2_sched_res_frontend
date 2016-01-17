@@ -38,12 +38,12 @@ export class AppComponent implements OnInit {
   public title = 'Tour de Liv';
   public heroes: Hero[];
   public selectedHero: Hero;
-  public blocks: ResponseData;
+  public response_data: ResponseData;
   public a_time_block: ResourceTimeBlock = null;
   public time_pix     = null;
 
   constructor(private _heroService: HeroService,
-              private _blocksService: ResponseDataService) {};
+              private _responseDataService: ResponseDataService) {};
 
   getHeroes() {
     this._heroService.getHeroes().then(heroes => this.heroes = heroes);
@@ -53,17 +53,17 @@ export class AppComponent implements OnInit {
     return this.a_time_block.blk.title
   }
 
-  getBlocks() {
-    this._blocksService.getBlocks().then(
-      // blocks => this.blocks = blocks;
-      function (blocks) {
-        this.blocks = blocks;
+  getResponseData() {
+    this._responseDataService.getResponseData().then(
+      // response_data => this.response_data = response_data;
+      function (response_data) {
+        this.response_data = response_data;
 
-        if (this.blocks.meta) {
-          // Mock the processing of response blocks.
+        if (this.response_data.meta) {
+          // Mock the processing of response data.
           // Start by constructing a TimeVsPix instance.
           this.time_pix     = (new TimeVsPix());
-          this.time_pix.merge_metadata(this.blocks);
+          this.time_pix.merge_metadata(this.response_data);
           this.a_time_block = this.getTimeBlock();
           // new UseBlockComponent(this.a_time_block, this.time_pix);
         }
@@ -72,14 +72,15 @@ export class AppComponent implements OnInit {
   }
 
   getTimeBlock() {
-    var time_blocks: ResourceTimeBlock[] = this.blocks['ZTimeHeaderDay_-8'];
+    var key = 'ZTimeHeaderDay_-8';
+    var time_blocks: ResourceTimeBlock[] = this.response_data[key];
     if (time_blocks) { return time_blocks[0] }
     return null;
   }
 
   ngOnInit() {
     this.getHeroes();
-    this.getBlocks();
+    this.getResponseData();
   }
 
   onSelect(hero: Hero) { this.selectedHero = hero }

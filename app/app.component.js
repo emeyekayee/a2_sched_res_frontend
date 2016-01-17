@@ -32,9 +32,9 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_heroService, _blocksService) {
+                function AppComponent(_heroService, _responseDataService) {
                     this._heroService = _heroService;
-                    this._blocksService = _blocksService;
+                    this._responseDataService = _responseDataService;
                     this.title = 'Tour de Liv';
                     this.a_time_block = null;
                     this.time_pix = null;
@@ -47,22 +47,23 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                 AppComponent.prototype.getATimeBlockTitle = function () {
                     return this.a_time_block.blk.title;
                 };
-                AppComponent.prototype.getBlocks = function () {
-                    this._blocksService.getBlocks().then(
-                    // blocks => this.blocks = blocks;
-                    function (blocks) {
-                        this.blocks = blocks;
-                        if (this.blocks.meta) {
-                            // Mock the processing of response blocks.
+                AppComponent.prototype.getResponseData = function () {
+                    this._responseDataService.getResponseData().then(
+                    // response_data => this.response_data = response_data;
+                    function (response_data) {
+                        this.response_data = response_data;
+                        if (this.response_data.meta) {
+                            // Mock the processing of response data.
                             // Start by constructing a TimeVsPix instance.
                             this.time_pix = (new time_vs_pix_1.TimeVsPix());
-                            this.time_pix.merge_metadata(this.blocks);
+                            this.time_pix.merge_metadata(this.response_data);
                             this.a_time_block = this.getTimeBlock();
                         }
                     }.bind(this));
                 };
                 AppComponent.prototype.getTimeBlock = function () {
-                    var time_blocks = this.blocks['ZTimeHeaderDay_-8'];
+                    var key = 'ZTimeHeaderDay_-8';
+                    var time_blocks = this.response_data[key];
                     if (time_blocks) {
                         return time_blocks[0];
                     }
@@ -70,7 +71,7 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                 };
                 AppComponent.prototype.ngOnInit = function () {
                     this.getHeroes();
-                    this.getBlocks();
+                    this.getResponseData();
                 };
                 AppComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
                 AppComponent = __decorate([
