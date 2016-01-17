@@ -23,8 +23,8 @@ System.register([], function(exports_1) {
                     this.meta = {}; // aka @meta
                 }
                 ;
-                TimeVsPix.prototype.merge_metadata = function (request_data) {
-                    var meta = request_data.meta;
+                TimeVsPix.prototype.merge_metadata = function (response_data) {
+                    var meta = response_data.meta;
                     this.meta = meta;
                     if (!this.base_time) {
                         this.base_time = meta['min_time'];
@@ -36,6 +36,7 @@ System.register([], function(exports_1) {
                     if (meta.visible_time) {
                         this.window_width_secs = meta.visible_time;
                     }
+                    return this; // Chainable
                 };
                 TimeVsPix.prototype.nextHi = function () { return this.dom_time_hi + this.window_width_secs; };
                 TimeVsPix.prototype.nextLo = function () { return this.dom_time_lo - this.window_width_secs; };

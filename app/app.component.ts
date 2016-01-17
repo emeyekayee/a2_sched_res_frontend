@@ -5,12 +5,7 @@ import {HeroService}         from './hero.service';
 import {BlocksService}       from './blocks.service';
 import {TimeVsPix}           from './time-vs-pix';
 import {UseBlockComponent}   from './use-block.component';
-
-// Interface for a_time_block
-interface ResourceTimeBlock {
-  rsrc: any,
-  blk: any
-}
+import {ResourceTimeBlock}   from './resource-time-block';
 
 @Component({
   selector: 'my-app',

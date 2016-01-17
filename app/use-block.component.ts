@@ -1,16 +1,6 @@
 import {Component} from 'angular2/core';
 import {TimeVsPix} from './time-vs-pix';
-
-// Interface for a_time_block
-interface ResourceTimeBlock {
-  rsrc: any,
-  blk: any
-}
-
-interface GeoHash {
-  left: string,
-  width: string
-}
+import {ResourceTimeBlock, GeoHash}  from './resource-time-block';
 
 @Component({
   selector: 'use-block',

@@ -8,15 +8,7 @@
 // NO  @set_time_cursor:   ()    => # bound
 // NO  @scroll_monitor:    ()    => 
 
-interface Meta {
-  t1: number,
-  t2: number,
-  visible_time?: number
-}
-
-interface RequestData {
-  meta: Meta
-}
+import {ResponseData,Meta}   from './resource-time-block';
 
 export class TimeVsPix {
   public base_time          = 0;        // aka @baseTime
@@ -32,8 +24,8 @@ export class TimeVsPix {
              
   constructor() {};
 
-  merge_metadata(request_data: RequestData) {
-    var meta = request_data.meta;
+  merge_metadata(response_data: ResponseData) {
+    var meta = response_data.meta;
     this.meta = meta;
     if ( !this.base_time ) { this.base_time = meta['min_time'] }
 
@@ -44,6 +36,7 @@ export class TimeVsPix {
     this.dom_time_hi = thi ? Math.max(thi, meta.t2) : meta.t2;
 
     if (meta.visible_time) { this.window_width_secs = meta.visible_time }
+    return this; // Chainable
   }
 
   nextHi() { return this.dom_time_hi + this.window_width_secs }

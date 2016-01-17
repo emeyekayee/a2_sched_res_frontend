@@ -1,0 +1,1 @@
+MSGswitches='-n -R -i --exclude=*.js --exclude=*.map --exclude=*min.js --exclude=*min.css --exclude="#"* --exclude=*~ --exclude-dir=.git --exclude-dir=.svn --exclude-dir=test --exclude-dir=coverage --exclude-dir=spec --exclude-dir=log --exclude-dir=tmp --exclude-dir=doc --exclude-dir=node_modules'
