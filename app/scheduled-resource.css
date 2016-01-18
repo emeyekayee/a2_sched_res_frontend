@@ -120,8 +120,8 @@ a:visited {  color: wheat;  text-decoration: none;}
   /*   } */
   /* } */
 
-.ZTimeHeaderHourrow.text_locator, .ZTimeHeaderHourRow.text_locator,
-.ZTimeHeaderDayrow.text_locator, .ZTimeHeaderDayRow.text_locator {
+.ZTimeHeaderHourrow .text_locator, .ZTimeHeaderHourRow .text_locator,
+.ZTimeHeaderDayrow .text_locator, .ZTimeHeaderDayRow .text_locator {
   /* .text_locator { */
     text-align:     center;
 }

@@ -13,10 +13,10 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
   template: `
     <h1>{{title}}</h1>
 
-    <span *ngIf="a_time_block">
+    <span *ngIf="time_blocks.length">
       Got a time block: {{ getATimeBlockTitle() }}
 
-      <timespan [time_blocks]="[a_time_block]" [time_pix]="time_pix">
+      <timespan [time_blocks]="time_blocks" [time_pix]="time_pix">
       </timespan>
 
     </span>
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   public heroes: Hero[];
   public selectedHero: Hero;
   public response_data: ResponseData;
-  public a_time_block: ResourceTimeBlock = null;
+  public time_blocks: ResourceTimeBlock[] = [];
   public time_pix     = null;
 
   constructor(private _heroService: HeroService,
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   getATimeBlockTitle() {
-    return this.a_time_block.blk.title
+    return this.time_blocks[0].blk.title
   }
 
   getResponseData() {
@@ -66,17 +66,17 @@ export class AppComponent implements OnInit {
           // Mock the processing of response data.
           // Start by constructing a TimeVsPix instance.
           this.time_pix = new TimeVsPix().merge_metadata(this.response_data);
-          this.a_time_block = this.getTimeBlock();
+          this.time_blocks = this.getTimeBlocks();
         }
       }.bind(this)
     );
   }
 
-  getTimeBlock() {
+  getTimeBlocks() {
     var key = 'ZTimeHeaderDay_-8';
-    var time_blocks: ResourceTimeBlock[] = this.response_data[key];
-    if (time_blocks) { return time_blocks[0] }
-    return null;
+    var timeblocks: ResourceTimeBlock[] = this.response_data[key];
+    if (timeblocks.length) { return timeblocks }
+    return [];
   }
 
   ngOnInit() {
