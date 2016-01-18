@@ -3,7 +3,8 @@ import {Hero}                from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService}         from './hero.service';
 import {TimeVsPix}           from './time-vs-pix';
-import {UseBlockComponent}   from './use-block.component';
+// import {UseBlockComponent}   from './use-block.component';
+import {TimespanComponent}   from './timespan.component';
 import {ResponseDataService} from './response-data.service';
 import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
 
@@ -11,13 +12,15 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
-    <p *ngIf="a_time_block">
-      Got a time block !
-      {{ getATimeBlockTitle() }}
-      <use-block [block]="a_time_block"
-                 [time_pix]="time_pix">
-      </use-block>
-    </p>
+
+    <span *ngIf="a_time_block">
+      Got a time block: {{ getATimeBlockTitle() }}
+
+      <timespan [time_blocks]="[a_time_block]" [time_pix]="time_pix">
+      </timespan>
+
+    </span>
+
     <h2>My Heroes</h2>
     <ul class="heroes">
       <li *ngFor="#hero of heroes" 
@@ -29,8 +32,8 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>
    `,
   // styles:[heroesCss],
-  styleUrls:['app/heroes.css', 'app/scheduled-resource.css'],
-  directives: [HeroDetailComponent, UseBlockComponent],
+  styleUrls: ['app/heroes.css'],
+  directives: [HeroDetailComponent, TimespanComponent],
   providers: [HeroService, ResponseDataService]
 })
 

@@ -11,7 +11,7 @@ import {ResponseData,Meta}   from './resource-time-block';
 
 export class TimeVsPix {
   public base_time          = 0;        // aka @baseTime
-  public window_width_secs  = 3 * 3600; // aka @timeWindow
+  public window_width_secs  = 24 * 3600; // aka @timeWindow
   public window_width_pix   = 750;      // aka @pixWindow
 
   // DOM has data for time range [dom_time_lo..dom_time_hi] (at least)

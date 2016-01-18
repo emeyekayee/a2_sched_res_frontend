@@ -4,14 +4,17 @@ import {ResourceTimeBlock, GeoHash}  from './resource-time-block';
 
 @Component({
   selector: 'use-block',
+  // Invoke as: 
+  //   <use-block [block]="time_block" [time_pix]="time_pix" />
   template: `
-    <div class="{{ block.blk.css_classes }} blockdiv"
+    <div class="{{ block.blk.css_classes }}blockdiv"
          [ngStyle]="styleGeoHash(block.blk)">
       <div class="text_locator">
         <a href="">{{block.blk.title}}</a>
       </div>
     </div>
     `, // <a ATTRIBUTE> WAS: ng-bind-html-unsafe="block.label"
+  styleUrls: ['app/scheduled-resource.css'],
   inputs: ['block', 'time_pix']
 })
 

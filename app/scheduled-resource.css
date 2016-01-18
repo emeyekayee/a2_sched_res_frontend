@@ -1,3 +1,6 @@
+a:link    {  color: white;  text-decoration: none;}
+a:visited {  color: wheat;  text-decoration: none;}
+
 /******************************************************************************/
 .timespan {
   position:         absolute;
@@ -117,14 +120,14 @@
   /*   } */
   /* } */
 
-.ZTimeHeaderHourrow .text_locator, .ZTimeHeaderHourRow .text_locator,
-.ZTimeHeaderDayrow .text_locator, .ZTimeHeaderDayRow .text_locator {
+.ZTimeHeaderHourrow.text_locator, .ZTimeHeaderHourRow.text_locator,
+.ZTimeHeaderDayrow.text_locator, .ZTimeHeaderDayRow.text_locator {
   /* .text_locator { */
     text-align:     center;
 }
 
-.ZTimeHeaderHourrow .blockdiv, .ZTimeHeaderHourRow .blockdiv,
-.ZTimeHeaderDayrow .blockdiv, .ZTimeHeaderDayRow .blockdiv {
+.ZTimeHeaderHourrow.blockdiv, .ZTimeHeaderHourRow.blockdiv,
+.ZTimeHeaderDayrow.blockdiv, .ZTimeHeaderDayRow.blockdiv {
   /* .blockdiv { */
     height:         18px;
     padding:        2px;
@@ -133,21 +136,18 @@
   /* } */
 }
 
-
-.ZTimeHeaderHourrow .blockdiv, .ZTimeHeaderHourRow .blockdiv {
+.ZTimeHeaderHourrow.blockdiv, .ZTimeHeaderHourRow.blockdiv {
   /* .blockdiv { */
     font-size:      12px;
     padding-top:     4px;
   /* } */
 }
 
-
-.ZTimeHeaderDayrow .blockdiv, .ZTimeHeaderDayRow .blockdiv {
+.ZTimeHeaderDayrow.blockdiv, .ZTimeHeaderDayRow.blockdiv {
   /* .blockdiv { */
     font-size:      16px;
   /* } */
 }
-
 
 .blockdiv.ZTimeHeaderDayRow { /* background: $daytime-bg; */
   background: -webkit-linear-gradient(left,
