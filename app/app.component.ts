@@ -1,12 +1,16 @@
-import {Component, OnInit}   from 'angular2/core';
-import {Hero}                from './hero';
-import {HeroDetailComponent} from './hero-detail.component';
-import {HeroService}         from './hero.service';
-import {TimeVsPix}           from './time-vs-pix';
-// import {UseBlockComponent}   from './use-block.component';
-import {TimespanComponent}   from './timespan.component';
-import {ResponseDataService} from './response-data.service';
-import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
+import {Component, OnInit}      from 'angular2/core';
+
+import {Hero}                   from './hero';
+import {HeroDetailComponent}    from './hero-detail.component';
+import {HeroService}            from './hero.service';
+
+import {ResponseDataService}    from './response-data.service';
+import {ResourceSpec, ResponseData}
+                                from './resource-time-block';
+import {ResourceTimeBlock}      from './resource-time-block';  // temp
+import {TimeVsPix}              from './time-vs-pix';
+import {TimespansDataComponent} from './timespans-data.component';
+
 
 @Component({
   selector: 'my-app',
@@ -16,14 +20,14 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
     <span *ngIf="time_blocks.length">
       Got a time block: {{ getATimeBlockTitle() }}
 
-      <timespan [time_blocks]="time_blocks" [time_pix]="time_pix">
-      </timespan>
-
+      <timespans-data [resource_specs]="resource_specs"
+                      [timespans_hash]="timespans_hash"
+                      [time_pix]="time_pix"></timespans-data>
     </span>
 
     <h2>My Heroes</h2>
     <ul class="heroes">
-      <li *ngFor="#hero of heroes" 
+      <li *ngFor="#hero of heroes"
           [class.selected]="hero === selectedHero"
           (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
@@ -33,7 +37,7 @@ import {ResourceTimeBlock, ResponseData}  from './resource-time-block';
    `,
   // styles:[heroesCss],
   styleUrls: ['app/heroes.css'],
-  directives: [HeroDetailComponent, TimespanComponent],
+  directives: [HeroDetailComponent, TimespansDataComponent],
   providers: [HeroService, ResponseDataService]
 })
 
@@ -41,8 +45,11 @@ export class AppComponent implements OnInit {
   public title = 'Tour de Liv';
   public heroes: Hero[];
   public selectedHero: Hero;
+
   public response_data: ResponseData;
-  public time_blocks: ResourceTimeBlock[] = [];
+  public resource_specs: ResourceSpec[] = []
+  public time_blocks: ResourceTimeBlock[] = []; // Superfluous, temp
+  public timespans_hash: ResponseData;          // === this.response_data
   public time_pix     = null;
 
   constructor(private _heroService: HeroService,
@@ -66,12 +73,17 @@ export class AppComponent implements OnInit {
           // Mock the processing of response data.
           // Start by constructing a TimeVsPix instance.
           this.time_pix = new TimeVsPix().merge_metadata(this.response_data);
+
+          // RATHER: merge_metadata should include this; Get it from time_pix.
+          this.resource_specs = this.response_data.meta.rsrcs;
+          this.timespans_hash = this.response_data;
           this.time_blocks = this.getTimeBlocks();
         }
       }.bind(this)
     );
   }
 
+  // temp
   getTimeBlocks() {
     var key = 'ZTimeHeaderDay_-8';
     var timeblocks: ResourceTimeBlock[] = this.response_data[key];

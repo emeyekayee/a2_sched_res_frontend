@@ -18,3 +18,9 @@ export interface Meta {
 export interface ResponseData {
   meta: Meta
 }
+
+export interface ResourceSpec {
+  tag: string,
+  title: string,
+  label: string
+}
