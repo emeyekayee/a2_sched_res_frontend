@@ -7,24 +7,23 @@ import {HeroService}            from './hero.service';
 import {ResponseDataService}    from './response-data.service';
 import {ResourceSpec, ResponseData}
                                 from './resource-time-block';
-import {ResourceTimeBlock}      from './resource-time-block';  // temp
 import {TimeVsPix}              from './time-vs-pix';
 import {TimespansDataComponent} from './timespans-data.component';
-
 
 @Component({
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
 
-    <span *ngIf="time_blocks.length">
-      Got a time block: {{ getATimeBlockTitle() }}
-
+    <span *ngIf="resource_specs.length">
       <timespans-data [resource_specs]="resource_specs"
                       [timespans_hash]="timespans_hash"
                       [time_pix]="time_pix"></timespans-data>
     </span>
 
+    <p><br/></p>
+    <p><br/></p>
+    <p><br/></p>
     <h2>My Heroes</h2>
     <ul class="heroes">
       <li *ngFor="#hero of heroes"
@@ -48,7 +47,6 @@ export class AppComponent implements OnInit {
 
   public response_data: ResponseData;
   public resource_specs: ResourceSpec[] = []
-  public time_blocks: ResourceTimeBlock[] = []; // Superfluous, temp
   public timespans_hash: ResponseData;          // === this.response_data
   public time_pix     = null;
 
@@ -57,10 +55,6 @@ export class AppComponent implements OnInit {
 
   getHeroes() {
     this._heroService.getHeroes().then(heroes => this.heroes = heroes);
-  }
-
-  getATimeBlockTitle() {
-    return this.time_blocks[0].blk.title
   }
 
   getResponseData() {
@@ -74,21 +68,12 @@ export class AppComponent implements OnInit {
           // Start by constructing a TimeVsPix instance.
           this.time_pix = new TimeVsPix().merge_metadata(this.response_data);
 
-          // RATHER: merge_metadata should include this; Get it from time_pix.
+          // TODO: merge_metadata should include this; Get it from time_pix.
           this.resource_specs = this.response_data.meta.rsrcs;
           this.timespans_hash = this.response_data;
-          this.time_blocks = this.getTimeBlocks();
         }
       }.bind(this)
     );
-  }
-
-  // temp
-  getTimeBlocks() {
-    var key = 'ZTimeHeaderDay_-8';
-    var timeblocks: ResourceTimeBlock[] = this.response_data[key];
-    if (timeblocks.length) { return timeblocks }
-    return [];
   }
 
   ngOnInit() {
