@@ -11,12 +11,18 @@ import {ResponseData, ResourceSpec}
   //                   [timespans_hash]="timespans_hash"
   //                   [time_pix]="time_pix"></timespans-data>
   template: `
-    <div *ngFor="#res_tag of resourceTags()"
-         class="rsrcRow {{ kindFromTag(res_tag) }}row">
+    <div class="timespans-container">
+      <div class="scrolling-container">
+        <div class="positioned-container">
 
-      <timespan [time_blocks]="timespans_hash[res_tag]"
-                [time_pix]="time_pix"></timespan>
+          <div *ngFor="#res_tag of resourceTags()"
+               class="rsrcRow {{ kindFromTag(res_tag) }}row">
 
+            <timespan [time_blocks]="timespans_hash[res_tag]"
+                      [time_pix]="time_pix"></timespan>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ['app/scheduled-resource.css'],
