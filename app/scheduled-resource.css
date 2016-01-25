@@ -95,6 +95,22 @@ a:visited {  color: wheat;  text-decoration: none;}
 
 
 /******************************************************************************/
+.Metrorow {
+  height:           24px;
+}
+
+.Metrorow .text_locator {
+    text-align:     center;
+}
+
+.Metrorow.blockdiv {
+    height:         22px;
+    padding:        2px;
+    background:     #265990;
+    font-size:      12px;
+}
+
+/******************************************************************************/
 .ZTimeHeaderHourrow, .ZTimeHeaderHourRow,
 .ZTimeHeaderDayrow, .ZTimeHeaderDayRow {
   height:           22px;
